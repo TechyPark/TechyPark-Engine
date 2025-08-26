@@ -1,32 +1,37 @@
 {
-  "name": "@techypark/backend",
+  "name": "techypark-engine",
   "version": "1.0.0",
-  "type": "module",
+  "description": "The main package and workspace manager for the TechyPark Engine project.",
+  "private": true,
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
   "scripts": {
-    "dev": "bun run --watch src/index.ts",
-    "build": "bun build src/index.ts --outdir=dist --target=bun",
-    "start": "bun run dist/index.js",
-    "test": "bun test"
+    "dev": "concurrently \"npm run dev --workspace=backend\" \"npm run dev --workspace=frontend\"",
+    "build": "npm run build --workspace=frontend && npm run build --workspace=backend",
+    "start": "npm start --workspace=backend",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "dependencies": {
-    "hono": "^4.4.12", // Or any recent v4 version
-
-    "@hono/node-server": "^1.3.0",
-    "drizzle-orm": "^0.29.0",
-    "postgres": "^3.4.0",
-    "redis": "^4.6.0",
-    "zod": "^3.22.0",
-    "jsonwebtoken": "^9.0.0",
-    "bcrypt": "^5.1.0",
-    "openai": "^4.20.0",
-    "@anthropic-ai/sdk": "^0.20.0",
-    "stripe": "^14.0.0",
-    "@sendgrid/mail": "^8.0.0",
-    "winston": "^3.11.0"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TechyPark/TechyPark-Engine.git"
   },
+  "keywords": [
+    "hono",
+    "react",
+    "engine",
+    "web"
+  ],
+  "author": "TechyPark",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TechyPark/TechyPark-Engine/issues"
+  },
+  "homepage": "https://github.com/TechyPark/TechyPark-Engine#readme",
   "devDependencies": {
-    "@types/bun": "latest",
-    "@types/bcrypt": "^5.0.0",
-    "@types/jsonwebtoken": "^9.0.0"
+    "concurrently": "^8.2.2",
+    "typescript": "^5.5.3"
   }
 }
+
