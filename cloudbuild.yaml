@@ -1,0 +1,32 @@
+steps:
+  # 1. Build the container image
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'build'
+      - '-t'
+      - 'us-central1-docker.pkg.dev/${PROJECT_ID}/techypark-repo/techypark-engine:$COMMIT_SHA'
+      - '.'
+
+  # 2. Push the container image to Artifact Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'push'
+      - 'us-central1-docker.pkg.dev/${PROJECT_ID}/techypark-repo/techypark-engine:$COMMIT_SHA'
+
+  # 3. Deploy to Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'gcloud'
+    args:
+      - 'run'
+      - 'deploy'
+      - 'techypark-engine' # Name of your Cloud Run service
+      - '--image=us-central1-docker.pkg.dev/${PROJECT_ID}/techypark-repo/techypark-engine:$COMMIT_SHA'
+      - '--region=us-central1'
+      - '--platform=managed'
+      - '--allow-unauthenticated'
+      - '--port=5000'
+      - '--set-secrets=MONGO_URI=MONGO_URI:latest,JWT_SECRET=JWT_SECRET:latest'
+
+# Store the image in Artifact Registry
+images:
+  - 'us-central1-docker.pkg.dev/${PROJECT_ID}/techypark-repo/techypark-engine:$COMMIT_SHA'
