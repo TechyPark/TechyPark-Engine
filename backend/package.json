@@ -1,37 +1,17 @@
 {
-  "name": "techypark-engine",
+  "name": "@techypark/backend",
   "version": "1.0.0",
-  "description": "The main package and workspace manager for the TechyPark Engine project.",
   "private": true,
-  "workspaces": [
-    "backend",
-    "frontend"
-  ],
+  "main": "src/index.js",
   "scripts": {
-    "dev": "concurrently \"npm run dev --workspace=backend\" \"npm run dev --workspace=frontend\"",
-    "build": "npm run build --workspace=frontend && npm run build --workspace=backend",
-    "start": "npm start --workspace=backend",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./src/index.js",
+    "dev": "node --watch ./src/index.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/TechyPark/TechyPark-Engine.git"
-  },
-  "keywords": [
-    "hono",
-    "react",
-    "engine",
-    "web"
-  ],
-  "author": "TechyPark",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/TechyPark/TechyPark-Engine/issues"
-  },
-  "homepage": "https://github.com/TechyPark/TechyPark-Engine#readme",
-  "devDependencies": {
-    "concurrently": "^8.2.2",
-    "typescript": "^5.5.3"
+  "dependencies": {
+    "@hono/node-server": "^1.19.0",
+    "hono": "^4.4.12"
   }
 }
+
+
 
