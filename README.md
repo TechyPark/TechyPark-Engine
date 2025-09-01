@@ -1,8 +1,4 @@
-diff --git a/README.md b/README.md
-index 02f488cf65385510433d9bd90f542e95e03b9386..502053504766eb6d34fc8df75b2bb38cf8190f6d 100644
---- a/README.md
-+++ b/README.md
-@@ -1,37 +1,36 @@
+
  <div align="center">
    
  ![TechyPark Engine](https://img.shields.io/badge/TechyPark-Engine-blue?style=for-the-badge)
